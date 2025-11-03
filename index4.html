@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zhara Touch </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #400333;
+            background: linear-gradient(135deg, #fab9ec 0%, #fff 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #800053 0%, #d75cbc 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f5a7ff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffb6ef;
+        }
+
+        .menu-toggle {
+            display: none;
+            background-color: #f7c6e8;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(171, 94, 169, 0.7), rgba(160, 0, 147, 0.511)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23ffb6c1" width="1200" height="600"/><circle fill="%23800020" cx="200" cy="150" r="50" opacity="0.3"/><circle fill="%23800020" cx="800" cy="300" r="80" opacity="0.2"/><circle fill="%23800020" cx="1000" cy="100" r="60" opacity="0.3"/></svg>');
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: rgb(239, 206, 238);
+            margin-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ffb6f6, #eec0ff);
+            color: #480144;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 201, 244, 0.904);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #800064;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #80007c, #ffb6f6);
+            margin: 20px auto;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .artist-image {
+            
+            width: 100%;
+            height: 370px;
+            background: linear-gradient(45deg, #fd9fe7, #c88bbf);
+            border-radius: 60%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #730080;
+            box-shadow: 0 10px 30px rgba(128, 0, 32, 0.2);
+        }
+
+        .artist-info h3 {
+            color: #800073;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .artist-info p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #5a0053;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background: #fab4ef7c;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: linear-gradient(135deg, #ea7ee1, #fcb2ff);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(128, 0, 32, 0.2);
+        }
+
+        .portfolio-item h4 {
+            color: #80006f;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-item p {
+            color: #702762;
+        }
+
+        .work-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+         .view-gallery {
+            color: #80007e;
+            font-weight: bold;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+         }
+                 .gallery-section {
+            padding: 2rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-item {
+            background: #f8f8f8;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #ffb6c1, #ffc0cb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #80005a;
+            position: relative;
+        }
+
+        .image-placeholder {
+            text-align: center;
+            color: #800064;
+        }
+
+        .image-placeholder small {
+            display: block;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            opacity: 0.7;
+        }
+
+        .gallery-caption {
+            padding: 1rem;
+            background: white;
+        }
+
+        .gallery-caption h4 {
+            color: #800075;
+            margin-bottom: 0.5rem;
+        }
+
+
+        /* Services & Booking */
+        .services {
+            background: linear-gradient(135deg, #f9c7f6, #c391ca);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+
+        .service-card:hover, .service-card.selected {
+            border-color: #800077;
+            transform: translateY(-5px);
+        }
+
+        .service-card h4 {
+            color: #800060;
+            margin-bottom: 1rem;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Booking Form */
+        .booking-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .booking-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ccc;
+            font-weight: bold;
+        }
+
+        .step.active {
+            color: #800077;
+        }
+
+        .step-number {
+            background: #ccc;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .step.active .step-number {
+            background: #800066;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #800062;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ffb6c1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #800071;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #800071;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #a0007b;
+        }
+
+        .btn-secondary {
+            background: #ffb6c1;
+            color: #80005a;
+        }
+
+        .btn-secondary:hover {
+            background: #ffc0cb;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #800057 0%, #a00070 100%);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #ffb6ec;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: #ffb6ef;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            background: #ffb6f9;
+            color: #800066;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 182, 234, 0.3);
+            color: #ffb6ef;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #800060;
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .booking-steps {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #800055;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #a00063;
+        }
+
+        .btn-secondary {
+            background: #ffb6c1;
+            color: #80005e;
+        }
+
+        .btn-secondary:hover {
+            background: #ffc0cb;
+        }
+
+        /* Bookings Section */
+        .bookings {
+            background: #fcccf2;
+        }
+
+        .booking-search {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 1rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(239, 179, 223, 0.1);
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #ffb6e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #800051;
+        }
+
+        .search-btn {
+            background: linear-gradient(45deg, #800066, #a00073);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+            white-space: nowrap;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .booking-results h3 {
+            color: #80004f;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .bookings-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .booking-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #800046;
+            position: relative;
+        }
+
+        .booking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-info h4 {
+            color: #800055;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .booking-id {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .booking-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #57154d;
+        }
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c44;
+        }
+
+        .booking-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .detail-icon {
+            font-size: 1.2rem;
+            width: 24px;
+        }
+
+        .detail-text {
+            color: #555;
+        }
+
+        .booking-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        .cancel-btn {
+            background: #dc3591;
+            color: rgb(255, 255, 255);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .cancel-btn:hover {
+            background: #c8238e;
+        }
+
+        .cancel-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .reschedule-btn {
+            background: #ff07a8;
+            color: #212529;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .reschedule-btn:hover {
+            background: #e000a4;
+        }
+
+        .cancel-timer {
+            background: #fff3cd;
+            color: #850469;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .no-bookings {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .no-bookings-content {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .no-bookings-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .no-bookings-content h3 {
+            color: #800066;
+            margin-bottom: 1rem;
+        }
+
+        .no-bookings-content p {
+            color: #3f0129;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+          
+            <div class="logo">🌼<b>Zhara Touch🍀</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home🌟</a></li>
+                <li><a href="#about">About🌟</a></li>
+                <li><a href="#portfolio">Portfolio🌟</a></li>
+                <li><a href="#services">Services🌟</a></li>
+                 <li><a href="#bookings">My Bookings🌟</a></li>
+                <li><a href="#contact">Contact🌟</a></li>
+            </ul>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Zhara Touch</h1>
+            <p>Where Beauty Meets Artistry - Transform your special moments with our expert beauty services</p>
+            <a href="#services" class="cta-button">Book Your Appointment</a>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Meet the Artist</h2>
+            <div class="about-content">
+                <div class="artist-image">
+                    <img src="zharaassets/sindhuveernala1.png" style="border-radius: 50%; animation: forwards;"   width="350" alt=" Sindhu Veernala"/>
+</body>
+                  
+                    </div>
+                </div>
+              <div class="artist-info">
+                    <h3>Sindhu Veernala</h3>
+                    <p>With over 3 years of experience in the beauty industry,i've mastered the art of enhancing natural beauty through makeup, mehendi, and styling. My passion for creating stunning looks has made me the go-to artist for brides and beauty enthusiasts.</p>
+                    <p>Specializing in bridal makeup, intricate mehendi designs, and creative home decor,i brings a unique blend of traditional techniques and modern trends to every project.</p>
+                    <p>My attention to detail and commitment to perfection ensures that every client feels confident and beautiful on their special day.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Previous Works</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                   
+                    <div class="work-icon">💄</div>
+                    <h4>Bridal Makeup</h4>
+                   <p>Stunning bridal looks that enhance natural beauty for the most important day.strating from 2000</p>
+                     <a href="/bridalmakeup.html" style="color: #ff8df5;">
+                    <div class="view-gallery">View Gallery →</div></a>
+                </div>
+               
+                <div class="portfolio-item">
+                 <div class="work-icon">🎨</div>
+                 <h4>Mehendi Artistry</h4>
+                  <p>Intricate and beautiful mehendi designs ranging from traditional to contemporary patterns, starting from 2000.</p>
+                  <a href="/mehindi.html" style="color: #ff8df5;">
+                    <div class="view-gallery">View Gallery →</div></a>
+                   </div>
+
+                <div class="portfolio-item">
+                    <div class="work-icon">💇‍♀️</div>
+                    <h4>Hair Styling</h4>
+                    <p>Creative hairstyles for all occasions - from elegant updos to trendy cuts and styling starting from 1000.</p>
+                    <a href="/hairstyle.html" style="color: #ff8df5;">
+                    <div class="view-gallery">View Gallery →</div>
+                </a>
+               
+            </div>
+                <div class="portfolio-item">
+                    <div class="work-icon">✨</div>
+                    <h4>Embroidery designs</h4>
+                    <p>Exquisite embroidery work that blends traditional artistry with modern patterns.</p>
+                     <a href="/embroidery.html" style="color: #ff8df5;">
+                    <div class="view-gallery">View Gallery →</div>
+                </a>
+                </div>
+                <div class="portfolio-item">
+                    <div class="work-icon">🏠</div>
+                    <h4>Home Decor</h4>
+               <p>Beautiful home decoration services for weddings, parties, and special eventsStarting from 2000.</p>
+                 <a href="/homedecore.html" style="color: #ff8df5;">
+                    <div class="view-gallery">View Gallery →</div>
+                </a>
+            </div>
+                <div class="portfolio-item">
+                    <div class="work-icon">🌟</div>
+                    <h4>Special Events</h4>
+                   <p>Complete beauty and styling services for photoshoots, engagements, and celebrations, starting from 2000.</p>
+                 <a href="/specialevents.html" style="color: #ff8df5;">
+                    <div class="view-gallery">View Gallery →</div>
+                </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Book Your Appointment</h2>
+            
+            <div class="services-grid">
+                <div class="service-card" onclick="selectService('mehendi')">
+                    <div class="service-icon">🎨</div>
+                    <h4>Mehendi</h4>
+                    <p>Traditional & modern designs</p>
+                </div>
+                <div class="service-card" onclick="selectService('hairstyles')">
+                    <div class="service-icon">💇‍♀️</div>
+                    <h4>Hair Styles</h4>
+                    <p>Cuts, styling & treatments</p>
+                </div>
+                <div class="service-card" onclick="selectService('makeup')">
+                    <div class="service-icon">💄</div>
+                    <h4>Makeup</h4>
+                    <p>Party & event makeup</p>
+                </div>
+                <div class="service-card" onclick="selectService('bridal')">
+                    <div class="service-icon">👰</div>
+                    <h4>Bridal Makeup</h4>
+                    <p>Complete bridal package</p>
+                </div>
+                <div class="service-card" onclick="selectService('decor')">
+                    <div class="service-icon">🏠</div>
+                    <h4>Home Decor</h4>
+                    <p>Event & party decoration</p>
+                </div>
+            </div>
+
+            <div class="booking-form">
+                <div class="booking-steps">
+                    <div class="step active" id="step1">
+                        <div class="step-number">1</div>
+                        <span>Service</span>
+                    </div>
+                    <div class="step" id="step2">
+                        <div class="step-number">2</div>
+                        <span>Details</span>
+                    </div>
+                    <div class="step" id="step3">
+                        <div class="step-number">3</div>
+                        <span>Confirm</span>
+                    </div>
+                </div>
+
+                <form id="bookingForm">
+                    <div class="form-step active" id="formStep1">
+                        <div class="form-group">
+                            <label for="service">Select Service</label>
+                            <select id="service" name="service" required style="cursor: pointer; cursor: all-scroll;">
+                                <option value="" style="background-color: #52035b; color: #ffb0fa;">Choose a service...</option>
+                                <option value="mehendi" style="background-color: #52035b; color: #ffb0fa;">Mehendi</option>
+                                <option value="hairstyles" style="background-color: #52035b; color: #ffb0fa;">Hair Styles</option>
+                                <option value="makeup" style="background-color: #52035b; color: #ffb0fa;">Makeup</option>
+                                <option value="bridal" style="background-color: #52035b; color: #ffb0fa;">Bridal Makeup</option>
+                                <option value="decor" style="background-color: #52035b; color: #ffb0fa;">Home Decor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Preferred Date</label>
+                            <input type="date" id="date" name="date" required >
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Preferred Time</label>
+                            <select id="time" name="time" required>
+                                <option value="" style="color: #f5b7fc; background-color: #52035b;">Select time...</option>
+                                <option value="09:00" style="color: #f5b7fc; background-color: #52035b;">9:00 AM</option>
+                                <option value="11:00" style="color: #f5b7fc; background-color:#52035b;">11:00 AM</option>
+                                <option value="14:00 "style="color:  #f5b7fc; background-color: #52035b;" >2:00 PM</option>
+                                <option value="16:00" style="color: #f5b7fc; background-color: #52035b;">4:00 PM</option>
+                                <option value="18:00 "style="color: #f5b7fc; background-color: #52035b;">6:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-step" id="formStep2">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Service Location</label>
+                            <select id="location" name="location" required>
+                                <option value="">Choose location...</option>
+                                <option value="salon">At Salon</option>
+                                <option value="home">At My Home</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">Special Requirements</label>
+                            <textarea id="notes" name="notes" rows="3" placeholder="Any special requests or notes..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-step" id="formStep3">
+                        <h3 style="color: #800071; margin-bottom: 1rem;">Booking Summary</h3>
+                        <div id="bookingSummary" style="background: #f8e8e8; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                            <!-- Summary will be populated by JavaScript -->
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="terms" required style="margin-right: 0.5rem;">
+                                I agree to the terms and conditions
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="button" class="btn btn-secondary" id="prevBtn" onclick="previousStep()" style="display: none;">Previous</button>
+                        <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">Next</button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;">Confirm Booking</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section id="bookings" class="bookings">
+        <div class="container">
+            <h2 class="section-title">My Bookings</h2>
+            
+            <div class="booking-search">
+                <div class="search-form">
+                    <input type="tel" id="searchPhone" placeholder="Enter your phone number to view bookings" class="search-input">
+                    <button onclick="searchBookings()" class="search-btn">Search Bookings</button>
+                </div>
+            </div>
+
+            <div id="bookingResults" class="booking-results" style="display: none;">
+                <h3>Your Bookings</h3>
+                <div id="bookingsList" class="bookings-list">
+                    <!-- Bookings will be displayed here -->
+                </div>
+            </div>
+
+            <div id="noBookings" class="no-bookings" style="display: none;">
+                <div class="no-bookings-content">
+                    <div class="no-bookings-icon">📅</div>
+                    <h3>No Bookings Found</h3>
+                    <p>No bookings found for this phone number. Make sure you entered the correct number used during booking.</p>
+                    <a href="#services" class="cta-button">Book New Appointment</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contact Information</h4>
+                    <p>📍Kanigiri, Nellore District</p>
+                    <p>📞 +91 73306 72457</p>
+                    <p>✉️ zharatouch.com</p>
+                    <p>🕒 Mon-Sat: 9AM-7PM</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <a href="#services">Bridal Makeup</a>
+                    <a href="#services">Mehendi Art</a>
+                    <a href="#services">Hair Styling</a>
+                    <a href="#services">Party Makeup</a>
+                    <a href="#services">Home Decor</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/mehendhi_shades.07?utm_source=ig_web_button_share_sheet&igsh=aWN6OXBrcWtyOGI0" title="Instagram">📷
+
+                        </a>
+                        <a href="#" title="Facebook">📘</a>
+                        <a href="#" title="WhatsApp">💬</a>
+                        <a href="#" title="YouTube">📺</a>
+                    </div>
+                    <p style="margin-top: 1rem;">Stay updated with our latest work and beauty tips!</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Zhara Touch. All rights reserved. | Crafted with ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        function selectService(service) {
+            // Remove previous selections
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Select clicked service
+            event.target.closest('.service-card').classList.add('selected');
+            
+            // Update form
+            document.getElementById('service').value = service;
+        }
+
+        function nextStep() {
+            if (validateCurrentStep()) {
+                if (currentStep < totalSteps) {
+                    // Hide current step
+                    document.getElementById(`formStep${currentStep}`).classList.remove('active');
+                    document.getElementById(`step${currentStep}`).classList.remove('active');
+                    
+                    // Show next step
+                    currentStep++;
+                    document.getElementById(`formStep${currentStep}`).classList.add('active');
+                    document.getElementById(`step${currentStep}`).classList.add('active');
+                    
+                    // Update buttons
+                    updateButtons();
+                    
+                    // Update summary if on last step
+                    if (currentStep === 3) {
+                        updateBookingSummary();
+                    }
+                }
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                // Hide current step
+                document.getElementById(`formStep${currentStep}`).classList.remove('active');
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                
+                // Show previous step
+                currentStep--;
+                document.getElementById(`formStep${currentStep}`).classList.add('active');
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                
+                // Update buttons
+                updateButtons();
+            }
+        }
+
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            prevBtn.style.display = currentStep > 1 ? 'block' : 'none';
+            nextBtn.style.display = currentStep < totalSteps ? 'block' : 'none';
+            submitBtn.style.display = currentStep === totalSteps ? 'block' : 'none';
+        }
+
+        function validateCurrentStep() {
+            const currentFormStep = document.getElementById(`formStep${currentStep}`);
+            const requiredFields = currentFormStep.querySelectorAll('[required]');
+            
+            for (let field of requiredFields) {
+                if (!field.value.trim()) {
+                    field.focus();
+                    alert('Please fill in all required fields.');
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function updateBookingSummary() {
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const location = document.getElementById('location').value;
+            
+            const serviceNames = {
+                'mehendi': 'Mehendi Art',
+                'hairstyles': 'Hair Styling',
+                'makeup': 'Party Makeup',
+                'bridal': 'Bridal Makeup Package',
+                'decor': 'Home Decoration'
+            };
+            
+            const summary = `
+                <p><strong>Service:</strong> ${serviceNames[service] || service}</p>
+                <p><strong>Date:</strong> ${new Date(date).toLocaleDateString()}</p>
+                <p><strong>Time:</strong> ${time}</p>
+                <p><strong>Client:</strong> ${name}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>Location:</strong> ${location === 'salon' ? 'At Salon' : 'At Client\'s Home'}</p>
+            `;
+            
+            document.getElementById('bookingSummary').innerHTML = summary;
+        }
+
+        // Form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (document.getElementById('terms').checked) {
+                alert('🎉 Booking confirmed! We will contact you shortly to confirm the details. Thank you for choosing Zhara Touch!');
+                
+                // Reset form
+                this.reset();
+                currentStep = 1;
+                document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+                document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+                document.getElementById('formStep1').classList.add('active');
+                document.getElementById('step1').classList.add('active');
+                updateButtons();
+                
+                // Remove service selections
+                document.querySelectorAll('.service-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
+            } else {
+                alert('Please agree to the terms and conditions.');
+            }
+        });
+
+        // Set minimum date to today
+        document.getElementById('date').min = new Date().toISOString().split('T')[0];
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                
+                // Close mobile menu if open
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96ffc3fd46ec74eb',t:'MTc1NTMzNTA4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

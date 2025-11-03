@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zhara Touch </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #fab9ec 0%, #fff 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #800053 0%, #d75cbc 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #d1a7d7;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffb6ef;
+        }
+
+        .menu-toggle {
+            display: none;
+            background-color: #f7c6e8;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(171, 94, 169, 0.7), rgba(160, 0, 147, 0.511)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23ffb6c1" width="1200" height="600"/><circle fill="%23800020" cx="200" cy="150" r="50" opacity="0.3"/><circle fill="%23800020" cx="800" cy="300" r="80" opacity="0.2"/><circle fill="%23800020" cx="1000" cy="100" r="60" opacity="0.3"/></svg>');
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: rgb(239, 206, 238);
+            margin-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ffb6f6, #eec0ff);
+            color: #570252;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 182, 193, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #800064;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #80007c, #ffb6f6);
+            margin: 20px auto;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .artist-image {
+            width: 100%;
+            height: 370px;
+            background: linear-gradient(45deg, #dddddd, #ffffff);
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #730080;
+            box-shadow: 0 10px 30px rgba(128, 0, 32, 0.2);
+        }
+
+        .artist-info h3 {
+            color: #800073;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .artist-info p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background: #fabef07c;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: linear-gradient(135deg, #ea7ee1, #fcb2ff);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(128, 0, 32, 0.2);
+        }
+
+        .portfolio-item h4 {
+            color: #80006f;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-item p {
+            color: #555;
+        }
+
+        .work-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+         .view-gallery {
+            color: #80007e;
+            font-weight: bold;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+         }
+                 .gallery-section {
+            padding: 2rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-item {
+            background: #f8f8f8;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #ffb6c1, #ffc0cb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #80005a;
+            position: relative;
+        }
+
+        .image-placeholder {
+            text-align: center;
+            color: #800064;
+        }
+
+        .image-placeholder small {
+            display: block;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            opacity: 0.7;
+        }
+
+        .gallery-caption {
+            padding: 1rem;
+            background: white;
+        }
+
+        .gallery-caption h4 {
+            color: #800075;
+            margin-bottom: 0.5rem;
+        }
+
+
+        /* Services & Booking */
+        .services {
+            background: linear-gradient(135deg, #f9c7f6, #c391ca);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+
+        .service-card:hover, .service-card.selected {
+            border-color: #800077;
+            transform: translateY(-5px);
+        }
+
+        .service-card h4 {
+            color: #800060;
+            margin-bottom: 1rem;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Booking Form */
+        .booking-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .booking-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ccc;
+            font-weight: bold;
+        }
+
+        .step.active {
+            color: #800077;
+        }
+
+        .step-number {
+            background: #ccc;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .step.active .step-number {
+            background: #800066;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #800062;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ffb6c1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #800071;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #800071;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #a0007b;
+        }
+
+        .btn-secondary {
+            background: #ffb6c1;
+            color: #80005a;
+        }
+
+        .btn-secondary:hover {
+            background: #ffc0cb;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #800057 0%, #a00070 100%);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #ffb6ec;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: #ffb6ef;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            background: #ffb6f9;
+            color: #800066;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 182, 193, 0.3);
+            color: #ffb6ef;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #80005a;
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .booking-steps {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+          
+            <div class="logo">🌼Zhara Touch🍀</div>
+            <ul class="nav-links">
+                  <li><a href="index4.html">Home🌟</a></li>
+                <li><a href="index4.html">About🌟</a></li>
+                <li><a href="index4.html">Portfolio🌟</a></li>
+                <li><a href="index4.html">Services🌟</a></li>
+                <li><a href="index4.html">Contact🌟</a></li>
+            </ul>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        </nav>
+    </header>
+
+ 
+
+    
+
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Previous Works</h2>
+            <div class="portfolio-grid">
+               <div class="portfolio-item">
+                    <div class="work-icon">🏠</div>
+                    <h4>Home Decor</h4>
+           
+             <div class="header-slider border">
+                      <ul>
+                    <img src="zharaassets/download (7).jpg"  height="400" width=""  style="display: inline-block;   border-radius: 5px;" alt="mehendi_desgin" />
+                    <img src="zharaassets/download (8).jpg"  height="400" width="" style="display: inline-block; border-radius: 5px;" alt="mehendi_desgin"/>
+                    <img src="zharaassets/download (9).jpg" height="400" width="" style="display: inline-block; border-radius: 5px;" alt="mehendi_desgin"/>
+                    <img src="zharaassets/Black and white half mandala.jpg"  height="400" width="" style="display: inline-block; border-radius: 5px;" alt="mehendi_desgin"/>
+                    <img src="zharaassets/Stunning Peacock Wall Mural_Decal _ Beautiful Home Wall Design _ Interior Decoration Idea.jpg"  height="400" width="" style="display: inline-block; border-radius: 5px;" alt="mehendi_desgin"/>
+                    </ul>
+                    </div>
+                  </div>
+                  </div>
+          </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contact Information</h4>
+                    <p>📍Kanigiri, Nellore District</p>
+                    <p>📞 +91 73306 72457</p>
+                    <p>✉️ zharatouch.com</p>
+                    <p>🕒 Mon-Sat: 9AM-7PM</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <a href="#services">Bridal Makeup</a>
+                    <a href="#services">Mehendi Art</a>
+                    <a href="#services">Hair Styling</a>
+                    <a href="#services">Party Makeup</a>
+                    <a href="#services">Home Decor</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/mehendhi_shades.07?utm_source=ig_web_button_share_sheet&igsh=aWN6OXBrcWtyOGI0" title="Instagram">📷
+
+                        </a>
+                        <a href="#" title="Facebook">📘</a>
+                        <a href="#" title="WhatsApp">💬</a>
+                        <a href="#" title="YouTube">📺</a>
+                    </div>
+                    <p style="margin-top: 1rem;">Stay updated with our latest work and beauty tips!</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Zhara Touch. All rights reserved. | Crafted with ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        function selectService(service) {
+            // Remove previous selections
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Select clicked service
+            event.target.closest('.service-card').classList.add('selected');
+            
+            // Update form
+            document.getElementById('service').value = service;
+        }
+
+        function nextStep() {
+            if (validateCurrentStep()) {
+                if (currentStep < totalSteps) {
+                    // Hide current step
+                    document.getElementById(`formStep${currentStep}`).classList.remove('active');
+                    document.getElementById(`step${currentStep}`).classList.remove('active');
+                    
+                    // Show next step
+                    currentStep++;
+                    document.getElementById(`formStep${currentStep}`).classList.add('active');
+                    document.getElementById(`step${currentStep}`).classList.add('active');
+                    
+                    // Update buttons
+                    updateButtons();
+                    
+                    // Update summary if on last step
+                    if (currentStep === 3) {
+                        updateBookingSummary();
+                    }
+                }
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                // Hide current step
+                document.getElementById(`formStep${currentStep}`).classList.remove('active');
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                
+                // Show previous step
+                currentStep--;
+                document.getElementById(`formStep${currentStep}`).classList.add('active');
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                
+                // Update buttons
+                updateButtons();
+            }
+        }
+
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            prevBtn.style.display = currentStep > 1 ? 'block' : 'none';
+            nextBtn.style.display = currentStep < totalSteps ? 'block' : 'none';
+            submitBtn.style.display = currentStep === totalSteps ? 'block' : 'none';
+        }
+
+        function validateCurrentStep() {
+            const currentFormStep = document.getElementById(`formStep${currentStep}`);
+            const requiredFields = currentFormStep.querySelectorAll('[required]');
+            
+            for (let field of requiredFields) {
+                if (!field.value.trim()) {
+                    field.focus();
+                    alert('Please fill in all required fields.');
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function updateBookingSummary() {
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const location = document.getElementById('location').value;
+            
+            const serviceNames = {
+                'mehendi': 'Mehendi Art',
+                'hairstyles': 'Hair Styling',
+                'makeup': 'Party Makeup',
+                'bridal': 'Bridal Makeup Package',
+                'decor': 'Home Decoration'
+            };
+            
+            const summary = `
+                <p><strong>Service:</strong> ${serviceNames[service] || service}</p>
+                <p><strong>Date:</strong> ${new Date(date).toLocaleDateString()}</p>
+                <p><strong>Time:</strong> ${time}</p>
+                <p><strong>Client:</strong> ${name}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>Location:</strong> ${location === 'salon' ? 'At Salon' : 'At Client\'s Home'}</p>
+            `;
+            
+            document.getElementById('bookingSummary').innerHTML = summary;
+        }
+
+        // Form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (document.getElementById('terms').checked) {
+                alert('🎉 Booking confirmed! We will contact you shortly to confirm the details. Thank you for choosing Zhara Touch!');
+                
+                // Reset form
+                this.reset();
+                currentStep = 1;
+                document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+                document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+                document.getElementById('formStep1').classList.add('active');
+                document.getElementById('step1').classList.add('active');
+                updateButtons();
+                
+                // Remove service selections
+                document.querySelectorAll('.service-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
+            } else {
+                alert('Please agree to the terms and conditions.');
+            }
+        });
+
+        // Set minimum date to today
+        document.getElementById('date').min = new Date().toISOString().split('T')[0];
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                
+                // Close mobile menu if open
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96ffc3fd46ec74eb',t:'MTc1NTMzNTA4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
